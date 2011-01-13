@@ -20,6 +20,7 @@
 		FA87D85912DF3F3700A45469 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA87D85712DF3F3700A45469 /* InfoPlist.strings */; };
 		FA87D85C12DF3F3700A45469 /* APITests.h in Resources */ = {isa = PBXBuildFile; fileRef = FA87D85B12DF3F3700A45469 /* APITests.h */; };
 		FA87D85E12DF3F3700A45469 /* APITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA87D85D12DF3F3700A45469 /* APITests.m */; };
+		FA87D86912DF420600A45469 /* Minus.m in Sources */ = {isa = PBXBuildFile; fileRef = FA87D86812DF420600A45469 /* Minus.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,8 @@
 		FA87D85A12DF3F3700A45469 /* APITests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "APITests-Prefix.pch"; sourceTree = "<group>"; };
 		FA87D85B12DF3F3700A45469 /* APITests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APITests.h; sourceTree = "<group>"; };
 		FA87D85D12DF3F3700A45469 /* APITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APITests.m; sourceTree = "<group>"; };
+		FA87D86712DF420600A45469 /* Minus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Minus.h; path = MinusAPI/Minus.h; sourceTree = "<group>"; };
+		FA87D86812DF420600A45469 /* Minus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Minus.m; path = MinusAPI/Minus.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +105,8 @@
 				FA87D84612DF3F3700A45469 /* APIAppDelegate.m */,
 				FA87D84812DF3F3700A45469 /* MainWindow.xib */,
 				FA87D83D12DF3F3700A45469 /* Supporting Files */,
+				FA87D86712DF420600A45469 /* Minus.h */,
+				FA87D86812DF420600A45469 /* Minus.m */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -245,6 +250,7 @@
 			files = (
 				FA87D84412DF3F3700A45469 /* main.m in Sources */,
 				FA87D84712DF3F3700A45469 /* APIAppDelegate.m in Sources */,
+				FA87D86912DF420600A45469 /* Minus.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +300,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
@@ -307,6 +314,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
