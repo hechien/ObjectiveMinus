@@ -7,6 +7,7 @@
 //
 
 #import "APIAppDelegate.h"
+#import "Minus.h"
 
 @implementation APIAppDelegate
 
@@ -16,6 +17,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   // Override point for customization after application launch.
+  
+  Minus *minus = [Minus new];
+  [minus CreateGallery];
+  NSString *path = @"/Documents/123.jpg";
+  [minus UploadItem:[NSString stringWithFormat:@"%@%@", NSHomeDirectory(), path]];
+  
   [self.window makeKeyAndVisible];
     return YES;
 }
