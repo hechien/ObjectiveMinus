@@ -27,17 +27,17 @@
 		FA87D83612DF3F3600A45469 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FA87D83812DF3F3600A45469 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FA87D83A12DF3F3600A45469 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		FA87D83E12DF3F3700A45469 /* API-Info.plist */ = {isa = PBXFileReference; path = "API-Info.plist"; sourceTree = "<group>"; };
+		FA87D83E12DF3F3700A45469 /* API-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "API-Info.plist"; sourceTree = "<group>"; };
 		FA87D84012DF3F3700A45469 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		FA87D84212DF3F3700A45469 /* API-Prefix.pch */ = {isa = PBXFileReference; path = "API-Prefix.pch"; sourceTree = "<group>"; };
+		FA87D84212DF3F3700A45469 /* API-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "API-Prefix.pch"; sourceTree = "<group>"; };
 		FA87D84312DF3F3700A45469 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		FA87D84512DF3F3700A45469 /* APIAppDelegate.h */ = {isa = PBXFileReference; path = APIAppDelegate.h; sourceTree = "<group>"; };
+		FA87D84512DF3F3700A45469 /* APIAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIAppDelegate.h; sourceTree = "<group>"; };
 		FA87D84612DF3F3700A45469 /* APIAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIAppDelegate.m; sourceTree = "<group>"; };
 		FA87D84912DF3F3700A45469 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		FA87D85012DF3F3700A45469 /* APITests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = APITests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FA87D85612DF3F3700A45469 /* APITests-Info.plist */ = {isa = PBXFileReference; path = "APITests-Info.plist"; sourceTree = "<group>"; };
+		FA87D85612DF3F3700A45469 /* APITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "APITests-Info.plist"; sourceTree = "<group>"; };
 		FA87D85812DF3F3700A45469 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		FA87D85A12DF3F3700A45469 /* APITests-Prefix.pch */ = {isa = PBXFileReference; path = "APITests-Prefix.pch"; sourceTree = "<group>"; };
+		FA87D85A12DF3F3700A45469 /* APITests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "APITests-Prefix.pch"; sourceTree = "<group>"; };
 		FA87D85B12DF3F3700A45469 /* APITests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APITests.h; sourceTree = "<group>"; };
 		FA87D85D12DF3F3700A45469 /* APITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APITests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -296,7 +296,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -309,7 +309,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 			};
@@ -324,6 +324,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "API/API-Prefix.pch";
 				INFOPLIST_FILE = "API/API-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -337,6 +338,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "API/API-Prefix.pch";
 				INFOPLIST_FILE = "API/API-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
