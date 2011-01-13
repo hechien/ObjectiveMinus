@@ -7,11 +7,27 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ASIFormDataRequest.h"
 
 
-@interface Minus : NSObject {
+@interface Minus : NSObject <ASIHTTPRequestDelegate> {
+  NSString *version;
+  NSURL *createURL;
+  NSURL *uploadURL;
+  NSURL *saveURL;
+  NSURL *getItemsURL;
+  
+  NSString *editor_id;
+  NSString *reader_id;
+  NSString *key;
+  
 @private
     
 }
+
+-(void)CreateGallery;
+-(void)UploadItem:(NSString*)filePath;
+-(void)SaveGallery;
+-(void)GetItems;
 
 @end
