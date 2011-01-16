@@ -3,7 +3,6 @@
 //  API
 //
 //  Created by hechien on 民國100/1/13.
-//  Copyright 100 凱鈿行動科技. All rights reserved.
 //
 
 #import "APIAppDelegate.h"
@@ -22,6 +21,7 @@
   [minus CreateGallery];
   NSString *path = @"/Documents/123.jpg";
   [minus UploadItem:[NSString stringWithFormat:@"%@%@", NSHomeDirectory(), path]];
+  
   
   [self.window makeKeyAndVisible];
     return YES;

@@ -3,7 +3,6 @@
 //  API
 //
 //  Created by hechien on 民國100/1/13.
-//  Copyright 100 凱鈿行動科技. All rights reserved.
 //
 
 #import "Minus.h"
@@ -12,6 +11,7 @@
 #import "JSON.h"
 
 @implementation Minus
+@synthesize editor_id, reader_id, key;
 
 -(Minus*)init{
   if((self = [super init])){
@@ -69,7 +69,37 @@
   [form startAsynchronous];
 }
 
--(void)SaveGallery{
+-(void)SaveGallery:(NSString*)name
+       forEditorID:(NSString*)_editor_id
+            andKey:(NSString*)_key
+        withOrder:(NSString*)items{
+  // Not yet finished.
+  // Parameters
+  // - name
+  // - id
+  // - key
+  // - items
+  
+  if([_editor_id length] < 1) _editor_id = editor_id;
+  if([_key length] < 1) _key = key;
+  
+  NSString *appendPath = [NSString stringWithFormat: \
+                          @"?name=%@&id=%@&key=%@&items=%@", \
+                          name, _editor_id, _key, items];
+  NSURL *_saveTo = [NSURL URLWithString:
+                    [NSString stringWithFormat:@"%@%@", \
+                     [saveURL absoluteURL], appendPath]];
+  NSLog(@"Save URL: %@", [_saveTo absoluteURL]);
+  ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:_saveTo];
+  [request startSynchronous];
+  
+  NSError *error = [request error];
+  if(!error){
+    NSString *response = [request responseString];
+    NSLog(@"Response: %@", response);
+  }
+  
+  [error release];
   
 }
 
@@ -94,6 +124,8 @@
   NSDictionary *result = [json objectWithString:response];
   NSLog(@"Response: %@", response);
   NSLog(@"Result: %@", result);
+  
+  [self SaveGallery:@"XDDDD" forEditorID:@"" andKey:@"" withOrder:@""];
 }
 
 
