@@ -10,6 +10,9 @@
 
 
 @interface Minus : NSObject <ASIHTTPRequestDelegate> {
+  
+  id delegate;
+  
   NSString *version;
   NSURL *createURL;
   NSURL *uploadURL;
@@ -24,16 +27,37 @@
     
 }
 
+@property (nonatomic, retain) id delegate;
 @property (nonatomic, readonly) NSString *editor_id;
 @property (nonatomic, readonly) NSString *reader_id;
 @property (nonatomic, readonly) NSString *key;
 
 -(void)CreateGallery;
--(void)UploadItem:(NSString*)filePath;
+-(void)UploadItem:(NSString*)filePath 
+       toEditorID:(NSString*)_editor_id;
+
 -(void)SaveGallery:(NSString*)name
        forEditorID:(NSString*)_editor_id
             andKey:(NSString*)key
          withOrder:(NSString*)items;
--(void)GetItems;
+-(void)getItemsByID:(NSString*)_id;
+
+@end
+
+@protocol MinusDelegate <NSObject>
+
+@required
+
+-(void)createGalleryFinishedWithResult:(NSDictionary*)result;
+-(void)createGalleryFailedWithError:(NSError*)error;
+
+-(void)uploadFileFinishedWithResult:(NSDictionary*)result;
+-(void)uploadFileFailedWithError:(NSError*)error;
+
+-(void)saveGalleryFinished;
+-(void)saveGalleryFailedWithError:(NSError*)error;
+
+-(void)galleryItemsResult:(NSDictionary*)result;
+-(void)galleryItemsFailedWithError:(NSError*)error;
 
 @end

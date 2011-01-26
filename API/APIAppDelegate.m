@@ -6,7 +6,6 @@
 //
 
 #import "APIAppDelegate.h"
-#import "Minus.h"
 
 @implementation APIAppDelegate
 
@@ -17,15 +16,58 @@
 {
   // Override point for customization after application launch.
   
-  Minus *minus = [Minus new];
+  minus = [Minus new];
+  [minus setDelegate: self];
   [minus CreateGallery];
-  NSString *path = @"/Documents/123.jpg";
-  [minus UploadItem:[NSString stringWithFormat:@"%@%@", NSHomeDirectory(), path]];
+  
   
   
   [self.window makeKeyAndVisible];
-    return YES;
+  return YES;
 }
+
+#pragma mark -
+#pragma mark Minus Delegate
+
+-(void)createGalleryFinishedWithResult:(NSDictionary*)result{
+  NSLog(@"Create, result: %@", result);
+  editorID = [[result objectForKey:@"editor_id"] retain];
+  NSString *path = @"/Documents/123.jpg";
+  
+  [minus UploadItem:[NSString stringWithFormat:@"%@%@", NSHomeDirectory(), path]
+         toEditorID:editorID];
+}
+
+-(void)createGalleryFailedWithError:(NSError*)error{
+  NSLog(@"Well... something going wrong.");
+}
+
+-(void)uploadFileFinishedWithResult:(NSDictionary*)result{
+  NSLog(@"Images uploaded with result: %@", result);
+  [minus getItemsByID:editorID];
+}
+
+-(void)uploadFileFailedWithError:(NSError *)error{
+  NSLog(@"Oops... Upload failed with error: %@", error);
+}
+
+-(void)saveGalleryFinished{
+  
+}
+
+-(void)saveGalleryFailedWithError:(NSError*)error{
+  
+}
+
+-(void)galleryItemsResult:(NSDictionary*)result{
+  NSLog(@"Gallery Items: %@", result);
+}
+
+-(void)galleryItemsFailedWithError:(NSError*)error{
+  NSLog(@"Failed to get gallery items");
+}
+
+#pragma mark -
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

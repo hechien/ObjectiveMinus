@@ -6,9 +6,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Minus.h"
 
-@interface APIAppDelegate : NSObject <UIApplicationDelegate> {
+@interface APIAppDelegate : NSObject <UIApplicationDelegate, MinusDelegate> {
 @private
+  
+  Minus *minus;
+  NSString *editorID;
 
 }
 

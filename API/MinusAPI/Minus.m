@@ -11,6 +11,7 @@
 #import "JSON.h"
 
 @implementation Minus
+@synthesize delegate;
 @synthesize editor_id, reader_id, key;
 
 -(Minus*)init{
@@ -24,6 +25,11 @@
                  [NSString stringWithFormat:@"%@/SaveGallery", baseURL]] retain];
     getItemsURL = [[NSURL URLWithString:
                  [NSString stringWithFormat:@"%@/GetItems", baseURL]] retain];
+    
+    editor_id = @"";
+    reader_id = @"";
+    key = @"";
+    delegate = nil;
   }
   return self;
 }
@@ -37,30 +43,30 @@
   NSError *error = [request error];
   if(!error){
     NSString *response = [request responseString];
-    NSLog(@"Response: %@", response);
     
     SBJSON *json = [[SBJSON new] autorelease];
     NSDictionary *result = [json objectWithString:response];
-    editor_id = [[result objectForKey:@"editor_id"] retain];
-    reader_id = [[result objectForKey:@"reader_id"] retain];
-    key = [[result objectForKey:@"key"] retain];
     
-    NSLog(@"JSON: %@", result);
+    if(delegate){
+      [delegate createGalleryFinishedWithResult:result];
+    }
+  }else{
+    if(delegate){
+      [delegate createGalleryFailedWithError:error];
+    }
   }
-  [error release];
-//  [request release];
 }
 
--(void)UploadItem:(NSString*)filePath{
+-(void)UploadItem:(NSString*)filePath
+       toEditorID:(NSString*)_editor_id{
   NSString *appendPath = [NSString stringWithFormat: \
                           @"?editor_id=%@&key=%@&filename=%@", \
-                          editor_id, key, [filePath lastPathComponent]];
+                          _editor_id, key, [filePath lastPathComponent]];
   NSURL *_uploadTo = [NSURL URLWithString:
                       [NSString stringWithFormat:@"%@%@", \
                        [uploadURL absoluteString], appendPath]];
-  NSLog(@"File will be uploaded to: %@", [_uploadTo absoluteString]);
   ASIFormDataRequest *form = [ASIFormDataRequest requestWithURL:_uploadTo];
-  NSData *fileContent = [[NSData alloc] initWithContentsOfFile:filePath];
+  NSData *fileContent = [[[NSData alloc] initWithContentsOfFile:filePath] autorelease];
   
   [form setPostBody:(NSMutableData*)fileContent];
   [form setDelegate:self];
@@ -83,28 +89,49 @@
   if([_editor_id length] < 1) _editor_id = editor_id;
   if([_key length] < 1) _key = key;
   
-  NSString *appendPath = [NSString stringWithFormat: \
-                          @"?name=%@&id=%@&key=%@&items=%@", \
-                          name, _editor_id, _key, items];
-  NSURL *_saveTo = [NSURL URLWithString:
-                    [NSString stringWithFormat:@"%@%@", \
-                     [saveURL absoluteURL], appendPath]];
-  NSLog(@"Save URL: %@", [_saveTo absoluteURL]);
-  ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:_saveTo];
-  [request startSynchronous];
+//  _editor_id = [NSString stringWithFormat:@"m%@", _editor_id];
   
+  NSLog(@"Parameters:\n");
+  NSLog(@"name=%@", name);
+  NSLog(@"id=%@", _editor_id);
+  NSLog(@"key=%@", _key);
+  NSLog(@"items=%@", items);
+  
+  ASIFormDataRequest *form = [ASIFormDataRequest requestWithURL:saveURL];
+  [form addPostValue:name forKey:@"name"];
+  [form addPostValue:_editor_id forKey:@"id"];
+  [form addPostValue:_key forKey:@"key"];
+  [form addPostValue:items forKey:@"items"];
+  
+  
+  [form setDelegate:self];
+  [form setDidFailSelector:@selector(saveGalleryFailed:)];
+  [form setDidFinishSelector:@selector(saveGalleryFinished:)];
+  [form startAsynchronous];
+}
+
+-(void)getItemsByID:(NSString*)_id{
+  NSURL *getURL = [NSURL URLWithString:
+                   [[getItemsURL absoluteString] 
+                    stringByAppendingFormat:@"/m%@", _id]];
+  
+  ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL: getURL];
+  [request startSynchronous];
   NSError *error = [request error];
   if(!error){
     NSString *response = [request responseString];
-    NSLog(@"Response: %@", response);
+    
+    SBJSON *json = [[SBJSON new] autorelease];
+    NSDictionary *result = [json objectWithString:response];
+    
+    if(delegate){
+      [delegate galleryItemsResult:result];
+    }
+  }else{
+    if(delegate){
+      [delegate galleryItemsFailedWithError:error];
+    }
   }
-  
-  [error release];
-  
-}
-
--(void)GetItems{
-  
 }
 
 #pragma mark -
@@ -113,21 +140,37 @@
 #pragma mark -
 #pragma mark ASIFormDataRequest Delegates
 
--(void)uploadFailed:(ASIHTTPRequest*)theRequest{
-  NSLog(@"Failed: %@", [theRequest error]);
+-(void)uploadFailed:(ASIHTTPRequest*)theRequest{  
+  if(delegate){
+    [delegate uploadFileFailedWithError:[theRequest error]];
+  }
 }
 
 -(void)uploadFinished:(ASIHTTPRequest*)theRequest{
-  NSLog(@"Upload finished.");
   SBJSON *json = [[SBJSON new] autorelease];
   NSString *response = [theRequest responseString];
   NSDictionary *result = [json objectWithString:response];
-  NSLog(@"Response: %@", response);
-  NSLog(@"Result: %@", result);
   
-  [self SaveGallery:@"XDDDD" forEditorID:@"" andKey:@"" withOrder:@""];
+  if(delegate){
+    [delegate uploadFileFinishedWithResult:result];
+  }
 }
 
+-(void)saveGalleryFailed:(ASIHTTPRequest*)theRequest{  
+  if(delegate){
+    [delegate saveGalleryFailedWithError:[theRequest error]];
+  }
+}
+
+-(void)saveGalleryFinished:(ASIHTTPRequest*)theRequest{
+  SBJSON *json = [[SBJSON new] autorelease];
+  NSString *response = [theRequest responseString];
+  NSDictionary *result = [json objectWithString:response];
+  
+  if(delegate){
+    [delegate saveGalleryFinished];
+  }
+}
 
 #pragma mark -
 
