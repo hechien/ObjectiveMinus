@@ -110,7 +110,7 @@
   [form startAsynchronous];
 }
 
--(void)getItemsByID:(NSString*)_id{
+-(void)GetItemsByID:(NSString*)_id{
   NSURL *getURL = [NSURL URLWithString:
                    [[getItemsURL absoluteString] 
                     stringByAppendingFormat:@"/m%@", _id]];

@@ -44,7 +44,7 @@
 
 -(void)uploadFileFinishedWithResult:(NSDictionary*)result{
   NSLog(@"Images uploaded with result: %@", result);
-  [minus getItemsByID:editorID];
+  [minus GetItemsByID:editorID];
 }
 
 -(void)uploadFileFailedWithError:(NSError *)error{

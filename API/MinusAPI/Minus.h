@@ -40,7 +40,7 @@
        forEditorID:(NSString*)_editor_id
             andKey:(NSString*)key
          withOrder:(NSString*)items;
--(void)getItemsByID:(NSString*)_id;
+-(void)GetItemsByID:(NSString*)_id;
 
 @end
 
