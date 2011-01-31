@@ -18,6 +18,7 @@
   NSURL *uploadURL;
   NSURL *saveURL;
   NSURL *getItemsURL;
+  NSURL *myGalleriesURL;
   
   NSString *editor_id;
   NSString *reader_id;
@@ -41,6 +42,7 @@
             andKey:(NSString*)key
          withOrder:(NSString*)items;
 -(void)GetItemsByID:(NSString*)_id;
+-(void)MyGalleries;
 
 @end
 
@@ -59,5 +61,9 @@
 
 -(void)galleryItemsResult:(NSDictionary*)result;
 -(void)galleryItemsFailedWithError:(NSError*)error;
+
+-(void)getGalleriesFinishedWithResult:(NSDictionary*)result;
+-(void)getGalleriesFailedWithError:(NSError*)error;
+
 
 @end

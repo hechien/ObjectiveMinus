@@ -25,6 +25,9 @@
                  [NSString stringWithFormat:@"%@/SaveGallery", baseURL]] retain];
     getItemsURL = [[NSURL URLWithString:
                  [NSString stringWithFormat:@"%@/GetItems", baseURL]] retain];
+    myGalleriesURL = [[NSURL URLWithString:
+                       [NSString stringWithFormat:@"%@/MyGalleries.json", baseURL]] retain];
+    
     
     editor_id = @"";
     reader_id = @"";
