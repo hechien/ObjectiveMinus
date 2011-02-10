@@ -31,7 +31,6 @@ It required JSON-framework and ASIHTTPRequest, so you must copy them or download
 >
 >   NSString *path = @"/Documents/123.jpg";
 >
->   
 >
 >   [minus UploadItem:[NSString stringWithFormat:@"%@%@", NSHomeDirectory(), path] toEditorID:editorID];
 >
