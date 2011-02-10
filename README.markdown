@@ -26,8 +26,7 @@ It required JSON-framework and ASIHTTPRequest, so you must copy them or download
 >   editorID = [[result objectForKey:@"editor_id"] retain];
 >   NSString *path = @"/Documents/123.jpg";
 >   
->   [minus UploadItem:[NSString stringWithFormat:@"%@%@", NSHomeDirectory(), path]
->          toEditorID:editorID];
+>   [minus UploadItem:[NSString stringWithFormat:@"%@%@", NSHomeDirectory(), path] toEditorID:editorID];
 > }
 
 More sample please read the APIAppDeleage.m
